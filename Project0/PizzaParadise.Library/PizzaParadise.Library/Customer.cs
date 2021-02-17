@@ -4,13 +4,15 @@ using System.Text;
 
 namespace PizzaParadise.Library
 {
-    class Customer
+    public class Customer
     {
-        private string name;
-        public string Name
+        public string FirstName { get; }
+        public string LastName { get; }
+
+        public Customer(string fName, string lName)
         {
-            get { return name; }
-            set { name = value; }
+            FirstName = fName;
+            LastName = lName;
         }
     }
 }

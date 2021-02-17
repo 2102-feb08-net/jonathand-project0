@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace PizzaPalace.Tests
+namespace PizzaParadise.Tests
 {
     public class UnitTest1
     {

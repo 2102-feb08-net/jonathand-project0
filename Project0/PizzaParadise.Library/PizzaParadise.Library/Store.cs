@@ -6,26 +6,29 @@ namespace PizzaParadise.Library
 {
     public class Store
     {
-        private List<Product> inventory;
-        
-        public Store()
+        public List<Product> Inventory { get; set; }
+        public List<Order> order { get; set; }
+        public int StoreNum { get; set; }
+
+        public Store(int store)
         {
-            inventory = new List<Product>();
+            StoreNum = store;
+            Inventory = new List<Product>();
         }
 
         public void addItem(string name, int amount, double price)
         {
             var item = new Product(name, amount, price);
-            inventory.Add(item);
+            Inventory.Add(item);
         }
 
-        public void removeItem(string name, int amount)
+        public void makeOrder(string name, int amount)
         {
-            foreach(Product n in inventory)
+            foreach(Product n in Inventory)
             {
                 if(n.ItemName == name)
                 {
-                    inventory.Remove(n);
+                    n.Amount -= amount;
                 }
 
             }

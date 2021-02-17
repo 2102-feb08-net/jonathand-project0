@@ -2,34 +2,18 @@
 
 namespace PizzaParadise.Library
 {
-    public class Item
+    public class Product
     {
-        private string itemName;
-        private int amount;
-        private int price;
+        public string ItemName { get; set; }
+        public int Amount { get; set; }
+        public double Price { get; }
 
-        public string ItemName
-        {
-            get{return itemName;}
-            set{itemName = value;}
-        }
-        public int Amount
-        {
-            get{return amount;}
-            set{amount = value;}
-        }
 
-        public int Price
+        public Product(string name, int num, double p)
         {
-            get { return price; }
-            set { price = value; }
-        }
-
-        public Item(string name, int num, int p)
-        {
-            itemName = name;
-            amount = num;
-            price = p;
+            ItemName = name;
+            Amount = num;
+            Price = p;
         }
     }
 }
