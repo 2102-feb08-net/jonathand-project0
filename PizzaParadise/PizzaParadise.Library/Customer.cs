@@ -1,13 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PizzaParadise.Library
 {
     public class Customer
     {
+        public int CustomerId { get; set; }
         private string firstName;
 
         private string lastName;
-        public int CustomerId { get; set; }
+
+        //public Customer(string fName, string LName)
+        //{
+        //    CustomerId = 0;
+        //    firstName = fName;
+        //    lastName = LName;
+        //}
 
         public string FirstName
         {
@@ -35,5 +43,7 @@ namespace PizzaParadise.Library
                 lastName = value;
             }
         }
+
+        public List<Order> customerOrders { get; set; } = new List<Order>();
     }
 }

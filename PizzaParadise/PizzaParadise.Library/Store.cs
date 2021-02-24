@@ -6,12 +6,25 @@ using System.Threading.Tasks;
 
 namespace PizzaParadise.Library
 {
-    class Store
+    public class Store
     {
         public int StoreId { get; set; }
         public string StoreName { get; set; }
-        public List<Inventory> Inventory { get; set; } = new List<Inventory>();
 
-        public List<Order> Orders { get; set; } = new List<Order>();
+        public List<Order> Orders { get; set; }
+
+        public Inventory StoreInventory { get; set; }
+
+        public Store(int store)
+        {
+            StoreId = store;
+            Orders = new List<Order>();
+            //StoreInventory = new Inventory();
+        }
+
+        public void addOrder(Order o)
+        {
+            Orders.Add(o);
+        }
     }
 }

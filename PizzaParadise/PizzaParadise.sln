@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaParadise.ConsoleUI", "PizzaParadise.ConsoleUI\PizzaParadise.ConsoleUI.csproj", "{3890FD0F-9646-4CAA-91D3-20E2F9DD9441}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.ConsoleUI", "PizzaParadise.ConsoleUI\PizzaParadise.ConsoleUI.csproj", "{3890FD0F-9646-4CAA-91D3-20E2F9DD9441}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaParadise.Library", "PizzaParadise.Library\PizzaParadise.Library.csproj", "{C78B6033-2C40-4D08-BBA3-BD484AFF7040}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.Library", "PizzaParadise.Library\PizzaParadise.Library.csproj", "{C78B6033-2C40-4D08-BBA3-BD484AFF7040}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaParadise.Tests", "PizzaParadise.Tests\PizzaParadise.Tests.csproj", "{34B7D04D-9D5E-4632-98F8-B40CDA1BEE9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.Tests", "PizzaParadise.Tests\PizzaParadise.Tests.csproj", "{34B7D04D-9D5E-4632-98F8-B40CDA1BEE9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaParadise.DAL", "PizzaParadise.DAL\PizzaParadise.DAL.csproj", "{33BE7EC9-CABE-41FC-B640-4A9ED51A2489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaParadise.DAL", "PizzaParadise.DAL\PizzaParadise.DAL.csproj", "{33BE7EC9-CABE-41FC-B640-4A9ED51A2489}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
