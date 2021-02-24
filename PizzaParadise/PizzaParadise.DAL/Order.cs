@@ -16,7 +16,7 @@ namespace PizzaParadise.DAL
         public int CustomerId { get; set; }
         public int StoreId { get; set; }
         public decimal OrderTotal { get; set; }
-        public DateTimeOffset OrderDate { get; set; }
+        public DateTime OrderTime { get; set; }
 
         public virtual Customer Customer { get; set; }
         public virtual Store Store { get; set; }

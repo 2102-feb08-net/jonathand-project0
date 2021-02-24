@@ -68,6 +68,8 @@ namespace PizzaParadise.DAL
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
+                entity.Property(e => e.OrderTime).HasColumnType("datetime");
+
                 entity.Property(e => e.OrderTotal).HasColumnType("numeric(10, 2)");
 
                 entity.Property(e => e.StoreId).HasColumnName("StoreID");

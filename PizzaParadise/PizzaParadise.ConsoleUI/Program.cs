@@ -30,16 +30,31 @@ namespace PizzaParadise.ConsoleUI
 
             using var context = new ChinookNumberTwoContext(contextOptions);
 
-            DisplayOrderDetails(1);
-    
+            //DisplayOrderDetails(1);
+            startUI();
+
+
         }
 
+
+        static void startUI()
+        {
+            Console.WriteLine("Welcome to Pizza Paradise!");
+            Console.WriteLine("Enter the Customer's First Name ");
+            string fName = Console.ReadLine();
+            Console.WriteLine("Enter the Customer's Last Name? ");
+            string lName = Console.ReadLine();
+
+            AddNewCustomer(fName, lName);
+            Console.WriteLine("Here's the new Customer List");
+            DisplayCustomers();
+        }
         static void DisplayCustomers()
         {
             using var context = new ChinookNumberTwoContext(contextOptions);
-            
+
             IQueryable<Customer> entries = context.Customers
-                .Include(x => x);
+                   .Select(x => x);
 
             Console.WriteLine("Current Customers");
             foreach(Customer c in entries)
@@ -64,61 +79,79 @@ namespace PizzaParadise.ConsoleUI
 
             context.SaveChanges();
 
-            // EF frees us from having to worry about foreign key values
-
-            //context.Tracks.Add(track);
-
-            // this not only will see the Genre and insert it as well, with the right foreign key value on the Track...
-            context.SaveChanges();
         }
 
-       //static void PlaceOrder()
-       // {
-       //     using var context = new ChinookNumberTwoContext(contextOptions);
-       //     Console.WriteLine("What is the Customer ID");
-       //     int customerId = int.Parse(Console.ReadLine());
-            
-       //     Console.WriteLine("What is the Store ID");
-       //     int storeId = int.Parse(Console.ReadLine());
+        static void PlaceOrder()
+        {
+            using var context = new ChinookNumberTwoContext(contextOptions);
+            Console.WriteLine("Enter Customer ID");
+            int customerId = int.Parse(Console.ReadLine());
 
-       //     bool buyMore = true;
-       //     do
-       //     {
-       //         Console.WriteLine("What would you like to buy?");
-       //         Console.WriteLine("Menu");
-       //         IQueryable<Product> entries = context.Products
-       //         .Include(x => x);
+            Console.WriteLine("Enter Store ID");
+            int storeId = int.Parse(Console.ReadLine());
 
-       //         foreach(Product p in entries)
-       //         {
-       //             Console.WriteLine($"Choice {p.ProductId}    {p.ProductName}");
-       //         }
-       //         int choice = int.Parse(Console.ReadLine());
-                   
-                 
+            bool buyMore = true;
+            do
+            {
+                Console.WriteLine("Enter Product Choice");
+                Console.WriteLine("Menu");
+                IQueryable<Product> entries = context.Products
+                .Select(x => x);
 
-       //     } while (buyMore);
-       // }
+                foreach (Product p in entries)
+                {
+                    Console.WriteLine($"Choice {p.ProductId}    {p.ProductName}");
+                }
+                int id = int.Parse(Console.ReadLine());
+
+                Product _product = new Product();
+
+                foreach (Product p in entries)
+                {
+                    if(p.ProductId == id)
+                    {
+                        _product = p.ProductName;
+                    }
+                }
+
+
+                Console.WriteLine("Enter Quantity");
+                int quantity = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Cost");
+                int cost = int.Parse(Console.ReadLine());
+
+                var entry = new OrderLine()
+                {
+                    OrderId = id,
+                    Product = _product,
+                    Quantity = quantity,
+                    ProductPrice = cost,
+                    d
+                }
+
+            }while(buyMore);
+        }
         static void DisplayOrderDetails(int Id)
         {
             using var context = new ChinookNumberTwoContext(contextOptions);
             IQueryable<OrderLine> entries = context.OrderLines
-                .Include(o => o.Order)
+                .Include(or => or.Order)
                 .Where(o => o.OrderId == Id)
                 .OrderBy(o => o.OrderLineId);
 
-            var first = entries.First();
-            var last = entries.Last();
+            OrderLine first = entries.First();
+            OrderLine last = entries.Last();
 
-            string Name = first.Order.Customer.FirstName + " " + first.Order.Customer.LastName;
+        
 
             Console.WriteLine($"Order {Id}");
             foreach (OrderLine currentOrder in entries)
             {
                 if(currentOrder == first)
                 {
-                    Console.WriteLine($"Time: {currentOrder.Order.OrderDate}");
-                    Console.WriteLine($"Customer: {Name}");
+                    Console.WriteLine($"Time: {currentOrder.Order.OrderTime}");
+                    Console.WriteLine($"Customer: { currentOrder.Order.Customer.FirstName } " +
+                        $" { currentOrder.Order.Customer.LastName}");
                     Console.WriteLine($"Product: {currentOrder.Product.ProductName}");
                 }
                 else if (currentOrder == last)
