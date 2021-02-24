@@ -31,28 +31,74 @@ namespace PizzaParadise.ConsoleUI
             using var context = new ChinookNumberTwoContext(contextOptions);
 
             DisplayOrderDetails(1);
-            //IQueryable<Inventory> s = context.Inventories
-            //    .Select(x => x);
-            //List<Store> products = s.ToList();
-
-            //IQueryable<Inventory> i = context.Inventories
-            //    .Include(i => i.Product)
-            //    .Include(i => i.Store)
-            //    .Where(i => i.StoreId == 1)
-            //    .OrderBy(i => i.InventoryLineId);
-
-            //List<Inventory> storeOne = i.ToList();
-            //Console.WriteLine("Here is the Initial Inventory for Store 1, as well as the other stores");
-            //foreach(Inventory inv in storeOne)
-            //{
-            //    Console.WriteLine($"Product: {inv.Product.ProductName}  Quantity: {inv.Quantity}");
-            //}
+    
         }
 
-        //static void DisplayCustomers()
-        //{
+        static void DisplayCustomers()
+        {
+            using var context = new ChinookNumberTwoContext(contextOptions);
+            
+            IQueryable<Customer> entries = context.Customers
+                .Include(x => x);
 
-        //}
+            Console.WriteLine("Current Customers");
+            foreach(Customer c in entries)
+            {
+                Console.WriteLine($"{c.FirstName} {c.LastName}");
+            }
+        }
+
+        static void AddNewCustomer(string fName, string lName)
+        {
+            using var context = new ChinookNumberTwoContext(contextOptions);
+
+
+            var entry = new Customer
+            {
+                FirstName = fName,
+                LastName = lName
+            };
+
+
+            context.Add(entry);
+
+            context.SaveChanges();
+
+            // EF frees us from having to worry about foreign key values
+
+            //context.Tracks.Add(track);
+
+            // this not only will see the Genre and insert it as well, with the right foreign key value on the Track...
+            context.SaveChanges();
+        }
+
+       //static void PlaceOrder()
+       // {
+       //     using var context = new ChinookNumberTwoContext(contextOptions);
+       //     Console.WriteLine("What is the Customer ID");
+       //     int customerId = int.Parse(Console.ReadLine());
+            
+       //     Console.WriteLine("What is the Store ID");
+       //     int storeId = int.Parse(Console.ReadLine());
+
+       //     bool buyMore = true;
+       //     do
+       //     {
+       //         Console.WriteLine("What would you like to buy?");
+       //         Console.WriteLine("Menu");
+       //         IQueryable<Product> entries = context.Products
+       //         .Include(x => x);
+
+       //         foreach(Product p in entries)
+       //         {
+       //             Console.WriteLine($"Choice {p.ProductId}    {p.ProductName}");
+       //         }
+       //         int choice = int.Parse(Console.ReadLine());
+                   
+                 
+
+       //     } while (buyMore);
+       // }
         static void DisplayOrderDetails(int Id)
         {
             using var context = new ChinookNumberTwoContext(contextOptions);
