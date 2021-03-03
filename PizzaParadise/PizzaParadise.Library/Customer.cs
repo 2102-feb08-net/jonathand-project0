@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PizzaParadise.Library
 {
     public class Customer
     {
-        public int CustomerId { get; set; }
+        private int customerId;
         private string firstName;
 
         private string lastName;
 
-        //public Customer(string fName, string LName)
-        //{
-        //    CustomerId = 0;
-        //    firstName = fName;
-        //    lastName = LName;
-        //}
+         public Customer(string fname, string lname)
+        {
+            FirstName = fname;
+            LastName = lname;
+        }
+        public Customer(int id, string fname, string lname)
+        {
+            customerId = id;
+            firstName = fname;
+            lastName = lname;
+        }
 
         public string FirstName
         {
@@ -23,20 +29,20 @@ namespace PizzaParadise.Library
             get => firstName;
             set
             {
-                if (value.Length == 0)
+                if (!value.All(Char.IsLetter))
                 {
                     throw new ArgumentException("First name must not be empty.", nameof(value));
                 }
                 firstName = value;
             }
         }
-        public string   LastName
+        public string LastName
         {
 
             get => lastName;
             set
             {
-                if (value.Length == 0)
+                if (!value.All(Char.IsLetter))
                 {
                     throw new ArgumentException("Last name must not be empty.", nameof(value));
                 }
@@ -44,6 +50,20 @@ namespace PizzaParadise.Library
             }
         }
 
-        public List<Order> customerOrders { get; set; } = new List<Order>();
+        public int CustomerId
+        {
+
+            get => customerId;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Id must be greater than 0", nameof(value));
+                }
+                customerId = value;
+            }
+        }
+        public List<Order> CustomerOrders { get; set; } = new List<Order>();
     }
 }
+

@@ -1,46 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzaParadise.Library
 {
     public class Order
     {
-        public int OrderId { get; set; }
-        //public Store OrderStore { get; }
-        //public Customer OrderCustomer { get; set; }
-        public List<OrderEntry> OrderEntries { get; set; }
+        private int orderId { get; set; }
+        public int CustomerId { get; set; }
+        public int StoreId { get; set; }
+        public Dictionary<Product, int> OrderEntries { get; set; }
 
-        public DateTimeOffset OrderTime { get; set; }
+        public DateTime OrderTime { get; set; }
 
-        //public Order(Store oStore, Customer oCustomer)
-        //{
-        //    OrderId = 0;
-        //    OrderStore = oStore;
-        //    OrderCustomer = oCustomer;
-        //    OrderTime = DateTime.Now;
-        //    OrderEntries = new List<OrderEntry>();
-        //}
-        
-        public double OrderTotal
+
+        public Order(int id, int storeId, int customerId)
+        {
+            orderId = id;
+            StoreId = storeId;
+            CustomerId = customerId;
+            OrderEntries = new Dictionary<Product, int>();
+        }
+
+        public Order(int storeId, int customerId)
+        {
+            StoreId = storeId;
+            CustomerId = customerId;
+            OrderEntries = new Dictionary<Product, int>();
+        }
+
+        public Order()
+        {
+            OrderEntries = new Dictionary<Product, int>();
+        }
+        public decimal OrderTotal
         {
             get
             {
-                double total = 0.0;
-                foreach(OrderEntry entry in OrderEntries)
+                decimal total = 0;
+                foreach (KeyValuePair<Product, int> entry in OrderEntries)
                 {
-                    total += entry.ProductPrice * entry.Quantity;
+                    total += entry.Key.Price * entry.Value;
                 }
                 return total;
             }
         }
-        //public void AddOrderLine(Product newProduct, double price, int quantity)
-        //{
-        //    var lineItem = new OrderEntry(newProduct, price, quantity);
-        //    OrderEntries.Add(lineItem);
-        //}
 
+        public int GetProductAmount(int id)
+        {
+            int amount = 0;
+            foreach (KeyValuePair<Product, int> entry in OrderEntries)
+            {
+                if (entry.Key.ProductId == id)
+                {
+                    amount = entry.Value;
+                }
+            }
+            return amount;
+        }
+        public int OrderId
+        {
+            get => orderId;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Id must be greater than 0", nameof(value));
+                }
+                orderId = value;
+            }
+        }
+        public void AddProductToOrder(Product p, int quantity)
+        {
+            OrderEntries.Add(p, quantity);
+        }
     }
+
 }
